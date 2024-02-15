@@ -15,7 +15,7 @@ const VideoCard = ({ data }) => {
     }
   }
   return (
-    <div className="p-2 mx-3 m-2 cursor-pointer">
+    <div className="p-2 mx-3 m-2 w-64 cursor-pointer">
       <img
         className="shadow-lg rounded-lg"
         alt="thumbnail"

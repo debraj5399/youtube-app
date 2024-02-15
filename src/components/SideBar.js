@@ -15,7 +15,7 @@ const SideBar = () => {
   const isSideMenuOpen = useSelector((store) => store.app.isSideMenuOpen);
   if (!isSideMenuOpen) return;
   return (
-    <div className="p-3 shadow-lg h-full w-56 fixed mt-20">
+    <div className="p-3 shadow-lg h-full w-56 fixed z-10 mt-20">
       <ul>
         <Link to={"/"}>
           <li className="font-light hover:bg-gray-200 rounded-lg cursor-pointer p-1 flex">

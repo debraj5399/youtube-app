@@ -18,10 +18,13 @@ const WatchPage = () => {
       }
     >
       <iframe
-        className="rounded-lg m-4 p-4"
-        width="1200"
-        height="650"
-        src={"https://www.youtube.com/embed/" + searchParams.get("v")}
+        className="rounded-lg m-4 p-4 w-3/4"
+        height={650}
+        src={
+          "https://www.youtube.com/embed/" +
+          searchParams.get("v") +
+          "?autoplay=1&mute=1"
+        }
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen

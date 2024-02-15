@@ -13,17 +13,19 @@ const Header = () => {
     dispatch(toggleMenu());
   };
   return (
-    <div className="bg-white grid grid-flow-col w-full shadow-lg fixed">
+    <div className="bg-white grid grid-flow-col z-20 w-full shadow-lg fixed">
       <div className="flex p-4 col-span-1">
         <RxHamburgerMenu
           className="h-8 cursor-pointer"
           onClick={handleToggleSideMenu}
         />
-        <img
-          className="h-6 mx-4 my-1 cursor-pointer "
-          alt="youtube-logo"
-          src={YOUTUBE_LOGO}
-        />
+        <a href="/">
+          <img
+            className="h-6 mx-4 my-1 cursor-pointer "
+            alt="youtube-logo"
+            src={YOUTUBE_LOGO}
+          />
+        </a>
       </div>
       <div className="col-span-10 mx-auto flex mt-2">
         <div className="h-10 m-auto">
