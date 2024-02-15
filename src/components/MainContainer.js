@@ -7,7 +7,9 @@ const MainContainer = () => {
   const currentSideBarState = useSelector((store) => store.app.isSideMenuOpen);
   return (
     <div
-      className={currentSideBarState ? "w-11/12 ml-60 mt-20" : "w-full mx-auto"}
+      className={
+        currentSideBarState ? "w-11/12 ml-60 mt-20 relative " : "w-full mx-auto"
+      }
     >
       <TrendingTags />
       <VideoListContainer />
