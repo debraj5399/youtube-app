@@ -10,10 +10,13 @@ const VideoListContainer = () => {
     getPopularVideos();
   }, []);
   const getPopularVideos = async () => {
-    const data = await fetch(VIDEOS_API);
-    const json = await data.json();
-    console.log(json);
-    setVideo(json?.items);
+    try {
+      const data = await fetch(VIDEOS_API);
+      const json = await data.json();
+      setVideo(json?.items);
+    } catch (error) {
+      console.log(error);
+    }
   };
   if (video === null) return <VideoListShimmer />;
 
