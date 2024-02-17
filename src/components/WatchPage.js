@@ -1,11 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import { closeMenu } from "../utils/appSlice";
+import VideoCard from "./VideoCard";
 
 const WatchPage = () => {
   const [searchParams] = useSearchParams();
   const currentSideBarState = useSelector((store) => store.app.isSideMenuOpen);
+  const cachedVideo = useSelector((store) => store.video);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(closeMenu());
@@ -14,7 +16,9 @@ const WatchPage = () => {
   return (
     <div
       className={
-        currentSideBarState ? "w-11/12 ml-60 mt-20" : "w-full mx-auto mt-14"
+        currentSideBarState
+          ? "w-11/12 ml-60 mt-20 flex"
+          : "w-full mx-auto mt-14 flex"
       }
     >
       <iframe
@@ -29,6 +33,14 @@ const WatchPage = () => {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       ></iframe>
+      <div className="mt-4">
+        {cachedVideo &&
+          cachedVideo.map((video) => (
+            <Link key={video.id} to={"/watch?v=" + video.id}>
+              <VideoCard data={video} type={"Browse"} />
+            </Link>
+          ))}
+      </div>
     </div>
   );
 };

@@ -5,11 +5,13 @@ import { MdSearch } from "react-icons/md";
 import { IoIosNotifications } from "react-icons/io";
 import { RiVideoUploadLine } from "react-icons/ri";
 import { CgProfile } from "react-icons/cg";
-import { toggleMenu } from "../utils/appSlice";
+import { openMenu, toggleMenu } from "../utils/appSlice";
 import { YOUTUBE_LOGO, YOUTUBE_SUGGESTION_API } from "../utils/constants";
 import { cacheResult } from "../utils/searchSlice";
+import { Link, useNavigate } from "react-router-dom";
 const Header = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const searchCache = useSelector((store) => store.search);
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResult, setSearchResult] = useState([]);
@@ -23,6 +25,7 @@ const Header = () => {
     setSearchResult(json[1]);
     dispatch(cacheResult({ [searchQuery]: json[1] }));
   };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       if (searchCache[searchQuery]) {
@@ -43,13 +46,13 @@ const Header = () => {
           className="h-8 cursor-pointer"
           onClick={handleToggleSideMenu}
         />
-        <a href="/">
+        <Link to="/" onClick={() => dispatch(openMenu())}>
           <img
             className="h-6 mx-4 my-1 cursor-pointer "
             alt="youtube-logo"
             src={YOUTUBE_LOGO}
           />
-        </a>
+        </Link>
       </div>
       <div className="col-span-10 mx-auto flex mt-2">
         <div className="h-10 m-auto">
@@ -64,7 +67,13 @@ const Header = () => {
           />
         </div>
         <div className="h-10 m-auto">
-          <button className="border border-gray-400  rounded-r-full p-1 px-3 bg-gray-200">
+          <button
+            onKeyDownCapture={() =>
+              navigate("/results?search_query=" + searchQuery)
+            }
+            onClick={() => navigate("/results?search_query=" + searchQuery)}
+            className="border border-gray-400  rounded-r-full p-1 px-3 bg-gray-200"
+          >
             <MdSearch size={24} />
           </button>
         </div>
@@ -72,7 +81,11 @@ const Header = () => {
           <div className="fixed bg-white py-2 mt-12 px-5 w-96 shadow-lg rounded-lg">
             <ul>
               {searchResult.map((result) => (
-                <li key={result} className="flex w-full px-2 py-1">
+                <li
+                  onClick={() => navigate("/results?search_query=" + result)}
+                  key={result}
+                  className="flex w-full px-2 py-1"
+                >
                   <MdSearch className="mt-1" size={20} />{" "}
                   <h2 className="px-2 ">{result}</h2>
                 </li>
